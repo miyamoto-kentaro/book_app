@@ -1,0 +1,103 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block header %}
+<h1>{{title}}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="book">
+<table>
+    <tr>
+    <td>タイトル(著者)</td>
+    <td></td>
+    <td>最大ページ数</td>
+    <tr>
+    <td>{{obj}}</td>
+    <td></td>
+    <td>{{obj.page_max}}page</td>
+    <td></td>
+    <td><a href="{% url 'create_page' obj.id %}" method="post">ページを追加する</a></td>
+    </tr>
+</table>
+</div>
+
+<div class="pages">
+
+<div style="float:left;">
+<table>
+{% for item in data1 %}
+<tr>
+<td><a href="{% url 'model_page' item.id %}" method="post">{{item.page_number}}</a></td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div style="float:left;">
+<table>
+{% for item in data2 %}
+<tr>
+<td><a href="{% url 'model_page' item.id %}" method="post">{{item.page_number}}</a></td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div style="float:left;">
+<table>
+{% for item in data3 %}
+<tr>
+<td><a href="{% url 'model_page' item.id %}" method="post">{{item.page_number}}</a></td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div style="float:left;">
+<table>
+{% for item in data4 %}
+<tr>
+<td><a href="{% url 'model_page' item.id %}" method="post">{{item.page_number}}</a></td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+<div style="float:left;">
+<table>
+{% for item in data5 %}
+<tr>
+<td><a href="{% url 'model_page' item.id %}" method="post">{{item.page_number}}</a></td>
+</tr>
+{% endfor %}
+</table>
+</div>
+
+</div>
+
+<div class="pagination" style="clear:both;">
+<table>
+{% if data.has_previous %}
+<tr>
+<td><a href="{% url 'model_book' obj.id %}">&laquo;first</a></td>
+<td><a href="{% url 'model_book' obj.id %}{{data.previous_page_number}}">&laquo;prev</a></td>
+{% else %}
+<td>&laquo;first</td>
+<td>&laquo;prev</td>
+{% endif %}
+<span class="current">
+<td>[{{data.number}}/{{data.paginator.num_pages}}]</td>
+</span>
+{% if data.has_next %}
+<td><a href="{% url 'model_book' obj.id %}{{data.next_page_number}}">next&raquo;</a></td>
+<td><a href="{% url 'model_book' obj.id %}{{data.paginator.num_pages}}">last&raquo;</a></td>
+{% else %}
+<td>next&raquo;</td>
+<td>last&raquo;</td>
+{% endif %}
+</div>
+{% endblock %}

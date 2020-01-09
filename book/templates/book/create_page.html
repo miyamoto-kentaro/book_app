@@ -1,0 +1,25 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+create_page
+{% endblock %}
+
+{% block header %}
+<h1>{{message}}</h1>
+{% endblock %}
+
+{% block content %}
+<p>{{book}}</p><br>
+    <div class="create_page">
+    <table>
+        <form action="{% url 'create_page' book_id %}" method="post">
+        {% csrf_token %}
+        {{ createform.as_table }}
+        <tr>
+        <th></th>
+        <td><input type="submit" value="作成"></td>
+        </tr>
+        </form>
+    </table>
+    </div>
+{% endblock %}

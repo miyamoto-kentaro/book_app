@@ -1,0 +1,44 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+search_result
+{% endblock %}
+
+{% block header %}
+<h1>検索結果</h1>
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+    <th>title</th>
+    <th></th>
+    </tr>
+{% for item in data %}
+    <tr>
+    <th><a href="{% url 'model_book' item.id  %}">{{item}}</a></td>
+    </tr>
+{% endfor %}
+
+<div class="pagination" style="clear:both;">
+<table>
+{% if data.has_previous %}
+<tr>
+<td><a href="{% url 'search_by_tags' tag.id %}">&laquo;first</a></td>
+<td><a href="{% url 'search_by_tags' tag.id %}{{data.previous_page_number}}">&laquo;prev</a></td>
+{% else %}
+<td>&laquo;first</td>
+<td>&laquo;prev</td>
+{% endif %}
+<span class="current">
+<td>[{{data.number}}/{{data.paginator.num_pages}}]</td>
+</span>
+{% if data.has_next %}
+<td><a href="{% url 'search_by_tags' tag.id %}{{data.next_page_number}}">next&raquo;</a></td>
+<td><a href="{% url 'search_by_tags' tag.id %}{{data.paginator.num_pages}}">last&raquo;</a></td>
+{% else %}
+<td>next&raquo;</td>
+<td>last&raquo;</td>
+{% endif %}
+</div>
+{% endblock %}

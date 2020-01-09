@@ -1,0 +1,27 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+create_book
+{% endblock %}
+
+{% block header %}
+<h1>{{message}}</h1>
+{% if exit %}
+<a href="{% url 'model_book' book_id %}">{{book}}のページへ</a>
+{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="create_book">
+    <table>
+        <form action="{% url 'create_book' %}" method="post">
+        {% csrf_token %}
+        {{ createform.as_table }}
+        <tr>
+        <th></th>
+        <td><input type="submit" value="作成"></td>
+        </tr>
+        </form>
+    </table>
+    </div>
+{% endblock %}

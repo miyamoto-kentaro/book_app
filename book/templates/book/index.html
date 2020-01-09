@@ -1,0 +1,42 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block header %}
+<h1>Home</h1>
+{% endblock %}
+
+{% block content %}
+{% for item in data %}
+<table>
+ <tr>
+  <td><a href="{% url 'search_by_tags' item.id %}">{{item}}</a></td>
+ </tr>
+</table>
+{% endfor %}
+
+<div class="pagination" style="clear:both;">
+<table>
+{% if data.has_previous %}
+<tr>
+<td><a href="{% url 'index' %}">&laquo;first</a></td>
+<td><a href="{% url 'index' %}{{data.previous_page_number}}">&laquo;prev</a></td>
+{% else %}
+<td>&laquo;first</td>
+<td>&laquo;prev</td>
+{% endif %}
+<span class="current">
+<td>[{{data.number}}/{{data.paginator.num_pages}}]</td>
+</span>
+{% if data.has_next %}
+<td><a href="{% url 'index' %}{{data.next_page_number}}">next&raquo;</a></td>
+<td><a href="{% url 'index' %}{{data.paginator.num_pages}}">last&raquo;</a></td>
+{% else %}
+<td>next&raquo;</td>
+<td>last&raquo;</td>
+{% endif %}
+</div>
+
+{% endblock %}

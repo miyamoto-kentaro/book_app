@@ -1,0 +1,25 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+create_content
+{% endblock %}
+
+{% block header %}
+<h1>{{message}}</h1>
+{% endblock %}
+
+{% block content %}
+<p>{{page}}</p><br>
+    <div class="create_content">
+    <table>
+        <form action="{% url 'create_content' page_id %}" method="post">
+        {% csrf_token %}
+        {{ createform.as_table }}
+        <tr>
+        <th></th>
+        <td><input type="submit" value="作成"></td>
+        </tr>
+        </form>
+    </table>
+    </div>
+{% endblock %}

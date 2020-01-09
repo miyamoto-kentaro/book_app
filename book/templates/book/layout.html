@@ -1,0 +1,57 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'book/style.css' %}" />
+</head>
+<body>
+
+    <div class="menu">
+        <table>        
+        <tr>
+        <th width="150px">menu</th>
+        <td>
+        <table>
+            <tr>
+            <td><a href="{% url 'index' %}">ホーム</a></td>
+            <td>&nbsp;&nbsp;&nbsp;</td>
+            <td><a href="{% url 'create_book' %}" method="post">本の追加</a></td>
+            </tr>
+        </table>
+        </td>
+        </tr>            
+        </table>
+    </div>
+    
+    <div class="header">
+    {% block header %}
+    {% endblock %}
+    </div>
+    
+    <div class="search">
+    <p>※本の名前や著者名を記入して本を探す</p>
+    <div class="searchform">
+    <table>
+        <form action="{% url 'search' %}" method="post">
+        {% csrf_token %}
+        {{form}}
+        <tr>
+        <th></th>
+        <td><input type="submit" value="検索"></td>
+        </tr>
+        </form>
+    </table>
+    </div>
+    </div>
+    
+    <div class="content">
+    {% block content %}
+    {% endblock %}
+    </div>
+</body>
+</html>
+        
+    

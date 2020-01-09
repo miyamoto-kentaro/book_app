@@ -1,0 +1,50 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block header %}
+<h1><a href="{% url 'model_book' book.id %}">{{book}}</a></h1>
+<h2>{{page_num}}ページ</h2>
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+    <td>{{obj}}</td>
+    <td></td>
+    <td><a href="{% url 'create_content' obj.id %}" method="post">コンテンツを追加する</a></td>
+    </tr>
+</table>
+
+<table>
+{% for item in data %}
+ <tr>
+  <td><a href="{% url 'model_page_content' item.id %}">{{item}}</a></td>
+ </tr>
+{% endfor %}
+</table>
+
+<div class="pagination" style="clear:both;">
+<table>
+{% if data.has_previous %}
+<tr>
+<td><a href="{% url 'model_page' obj.id %}">&laquo;first</a></td>
+<td><a href="{% url 'model_page' obj.id %}{{data.previous_page_number}}">&laquo;prev</a></td>
+{% else %}
+<td>&laquo;first</td>
+<td>&laquo;prev</td>
+{% endif %}
+<span class="current">
+<td>[{{data.number}}/{{data.paginator.num_pages}}]</td>
+</span>
+{% if data.has_next %}
+<td><a href="{% url 'model_page' obj.id %}{{data.next_page_number}}">next&raquo;</a></td>
+<td><a href="{% url 'model_page' obj.id %}{{data.paginator.num_pages}}">last&raquo;</a></td>
+{% else %}
+<td>next&raquo;</td>
+<td>last&raquo;</td>
+{% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'book/layout.html' %}
+
+{% block title %}
+{{content.content_title}}
+{% endblock %}
+
+{% block header %}
+<h1><a href="{% url 'model_page' page_id %}">{{content.page_number}}</a></h1>
+<h2>{{content.content_title}}</h2>
+{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+    <td>{{content.content_title}}</td>
+    </tr>
+    <tr>
+    <td>{{content.page_number}}ページ</td>
+    </tr>
+    <tr>
+    <td>{{content.line}}行目</td>
+    </tr>
+    <tr>
+    <td>式番号:{{content.formula_number}}</td>
+    </tr>
+    <tr>
+    <td>式(文章):{{content.formula_or_sentence}}</td>
+    </tr>
+</table>
+<p>{{content.content}}<p>
+{% endblock %}
